@@ -1,3 +1,4 @@
+<!-- **************************HTML CODE************************************ -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,43 +6,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TO DO LIST</title>
+
+    <!-- CSS link for different font like plus, cross and railway. -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet" />
+
+    <!-- Custom CSS Link -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- body start -->
+
+    <!-- Upper div that conent filter container and action container(plus and cross) -->
     <div class="toolbar">
+
+        <!-- filter container contain different color -->
         <div class="filter-container">
+
             <div class="filter ">
                 <div class="filter_color pink"></div>
             </div>
+
             <div class="filter ">
                 <div class="filter_color blue"></div>
             </div>
+
             <div class="filter ">
                 <div class="filter_color green"></div>
             </div>
+
             <div class="filter">
                 <div class="filter_color black"></div>
             </div>
+
         </div>
+        
+        <!-- action container contains plus and cross  -->
         <div class="action-container">
+
             <div class="icon-container">
                 <i class="fas fa-plus"></i>
             </div>
+
             <div class="icon-container">
                 <i class="fas fa-times"></i>
             </div>
+
         </div>
+
     </div>
+
+    <!-- main container contains task  -->
     <div class="main_container">
+
     </div>
+
+    <!-- Add js to use short unique id -->
+    <!-- defer is used when we want to load these js file at last.
+    HTML and Css code render first then js -->
     <script src="https://cdn.jsdelivr.net/npm/short-unique-id@latest/dist/short-unique-id.min.js" defer></script>
-    <!-- Usage -->
+    
+    <!-- Custom javascript -->
     <script src="script.js" defer></script>
+
+    <!-- body close -->
 </body>
 
 </html>
