@@ -51,12 +51,12 @@ function createModal() {
         placeholder="Enter Your text"></textarea>
     </div>
     <div class="modal_filter_container">
-        <div class="filter pink"></div>
+        <div class="filter red"></div>
         <div class="filter blue"></div>
         <div class="filter green"></div>
         <div class="filter black"></div>
     </div>`;
-    //Append child
+        //Append child
         body.appendChild(modalContainer);
 
         handleModal(modalContainer);
@@ -119,7 +119,11 @@ function createTask(color, task, flag, id) {
     taskContainer.innerHTML = `<div class="task_filter ${color}"></div>
     <div class="task_desc_container">
         <h3 class="uid">#${uid}</h3>
-        <div class="task_desc" contenteditable="true" >${task}</div>
+        <div class="task_desc">${task}</div>
+        <div class ="text_edit_controlcontainer">
+    <div class="lock">LOCK</div>
+    <div class="unlock"> UNLOCK</div>
+    </div>
     </div>
 </div >`;
 
@@ -139,9 +143,27 @@ function createTask(color, task, flag, id) {
     //Add event listener
     taskFilter.addEventListener("click", changeColor);
     taskContainer.addEventListener("click", deleteTask);
-    
+
     let taskDesc = taskContainer.querySelector(".task_desc");
+    let lockBt = document.querySelectorAll(".lock");
+    let unlockBt = document.querySelectorAll(".unlock");
+    for (let i = 0; i < lockBt.length; i++) {
+        lockBt[i].addEventListener("click", function () {
+            console.log("I m lock");
+            taskDesc.contentEditable = false;
+        })
+    }
+
+    for (let i = 0; i < unlockBt.length; i++) {
+        unlockBt[i].addEventListener("click", function () {
+            console.log("I m unlock aand content edit possible");
+            taskDesc.contentEditable = true;
+        })
+    }
+
+
     taskDesc.addEventListener("keypress", editTask);
+
 }
 
 // function that use to change color of priority bar .
@@ -150,7 +172,7 @@ function changeColor(e) {
     // e.target => event occur 
     let taskFilter = e.currentTarget;
     //Array of color
-    let colors = ["pink", "blue", "green", "black"];
+    let colors = ["red", "blue", "green", "black"];
     //Current color
     let cColor = taskFilter.classList[1];
     //Get current colour index
@@ -179,6 +201,7 @@ function setDeleteState(e) {
 // function that use to delete task .
 function deleteTask(e) {
     let taskContainer = e.currentTarget;
+    
     if (deleteState) {
         // local storage search -> remove
         let uidElem = taskContainer.querySelector(".uid");
@@ -195,7 +218,7 @@ function deleteTask(e) {
                 localStorage.setItem("allTask", finalTaskArr);
                 //remove task from UI
                 taskContainer.remove();
-    
+
                 break;
             }
         }
@@ -212,13 +235,37 @@ function editTask(e) {
         let { id } = taskArr[i];
         // if id and uid is same
         if (id == uid) {
+
             taskArr[i].task = taskDesc.innerText
             //convert into string
+
             let finalTaskArr = JSON.stringify(taskArr);
             //save changes in local storage
             localStorage.setItem("allTask", finalTaskArr);
 
             break;
+        }
+    }
+}
+
+for (let i = 0; i < colorBtn.length; i++) {
+    colorBtn[i].addEventListener("click", seperateBasicOnPriority);
+}
+
+
+function seperateBasicOnPriority(e) {
+    let taskContainer = document.querySelectorAll(".task_container");
+    for(let i=0;i<taskContainer.length;i++)
+    {
+        taskContainer[i].remove();
+    }
+    let colourBt = e.currentTarget;
+    let p_col = colourBt.classList[1];
+    console.log(p_col);
+    for (let i = 0; i < taskArr.length; i++) {
+        let { id, color, task } = taskArr[i];
+        if (color == p_col) {
+            createTask(color, task, false, id);
         }
     }
 }

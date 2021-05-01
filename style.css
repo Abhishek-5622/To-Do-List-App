@@ -18,7 +18,7 @@ body{
     /* when display is flex then all div inside this div are represent in vertical manner  */
     display: flex;
     align-items: center;
-    padding-left: 5rem;
+    justify-content: space-around;
 }
 .filter-container{
     height: 60%;
@@ -41,17 +41,37 @@ body{
     width:40%;
     border-radius: 0.1rem;
 }
-.pink{
-background-color: pink;
+
+.red{
+background-color: red;
+opacity: 0.5;
 }
+.red:hover{
+    opacity: 1;
+}
+
 .blue{
 background-color: blue;
+opacity: 0.7;
 }
+.blue:hover{
+    opacity: 1;
+}
+
 .green{
-background-color: green;
+background-color: rgb(38, 187, 38);
+opacity: 0.7;
 }
+.green:hover{
+    opacity: 1;
+}
+
 .black{
     background-color: rgb(26, 23, 23);
+    opacity: 0.7;
+}
+.black:hover{
+    opacity: 1;
 }
 .action-container{
     height: 60%;
@@ -127,6 +147,10 @@ padding: 1.7rem 1.2rem;
 .main_container{
    height:88vh;
    /* overflow is manage content of div */
+   background-image: url('p6.jpg');
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+  background-size: cover;
    overflow: auto;
     padding-top: 2rem;
     padding-left: 3rem;
@@ -146,6 +170,7 @@ padding: 1.7rem 1.2rem;
 .task_desc_container{
     height: 80%;
     padding-left:0.5rem;
+    padding-right: 0.5rem;
 }
 .task_desc{
     height: 70%;
@@ -159,3 +184,21 @@ padding: 1.7rem 1.2rem;
     color: #444;
     margin-bottom: 0.1rem;;
 }
+.lock
+{
+    height:1.2rem;
+    padding-left: 0.5rem;
+}
+.text_edit_controlcontainer
+{
+    display:flex;
+    justify-content: space-between;
+}
+.unlock{
+    height:1.2rem;
+    padding-right: 0.5rem;
+}
+.heading{
+    color: blanchedalmond;
+}
+
