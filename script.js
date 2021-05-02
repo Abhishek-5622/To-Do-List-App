@@ -121,8 +121,8 @@ function createTask(color, task, flag, id) {
         <h3 class="uid">#${uid}</h3>
         <div class="task_desc">${task}</div>
         <div class ="text_edit_controlcontainer">
-    <div class="lock">LOCK</div>
-    <div class="unlock"> UNLOCK</div>
+    <div class="lock"><i class="fas fa-lock"></i>LOCK</div>
+    <div class="unlock"> <i class="fas fa-unlock"></i> UNLOCK</div>
     </div>
     </div>
 </div >`;
@@ -147,16 +147,24 @@ function createTask(color, task, flag, id) {
     let taskDesc = taskContainer.querySelector(".task_desc");
     let lockBt = document.querySelectorAll(".lock");
     let unlockBt = document.querySelectorAll(".unlock");
+
+    //If user click on lock button then user can not edit the task.
     for (let i = 0; i < lockBt.length; i++) {
         lockBt[i].addEventListener("click", function () {
+            
             console.log("I m lock");
             taskDesc.contentEditable = false;
+            lockBt[i].style.color = "blue";
+            unlockBt[i].style.color="black";
         })
     }
 
+    //If user click on unlock button then user can edit the task.
     for (let i = 0; i < unlockBt.length; i++) {
         unlockBt[i].addEventListener("click", function () {
             console.log("I m unlock aand content edit possible");
+            unlockBt[i].style.color="blue";
+            lockBt[i].style.color="black";
             taskDesc.contentEditable = true;
         })
     }
@@ -252,20 +260,43 @@ for (let i = 0; i < colorBtn.length; i++) {
     colorBtn[i].addEventListener("click", seperateBasicOnPriority);
 }
 
-
+//function that is used to priority wise task.
 function seperateBasicOnPriority(e) {
     let taskContainer = document.querySelectorAll(".task_container");
+    //remove all the task from container
     for(let i=0;i<taskContainer.length;i++)
     {
         taskContainer[i].remove();
     }
+    //get the color on which user click.
     let colourBt = e.currentTarget;
     let p_col = colourBt.classList[1];
-    console.log(p_col);
+    
+    //Add those tasks which user want to see on screen. 
     for (let i = 0; i < taskArr.length; i++) {
         let { id, color, task } = taskArr[i];
         if (color == p_col) {
             createTask(color, task, false, id);
         }
+    }
+}
+
+//double click on any color filter
+for (let i = 0; i < colorBtn.length; i++) {
+    colorBtn[i].addEventListener("dblclick", displayAllTask);
+    
+}
+
+//function is call when user double click on any filter color then all the tasks that are present in local storage, are appear on screen.
+function displayAllTask()
+{
+    let taskContainer = document.querySelectorAll(".task_container");
+    for(let i=0;i<taskContainer.length;i++)
+    {
+        taskContainer[i].remove();
+    }
+    for (let i = 0; i < taskArr.length; i++) {
+        let { id, color, task } = taskArr[i];
+        createTask(color, task, false, id);
     }
 }
